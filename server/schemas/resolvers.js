@@ -53,7 +53,6 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     
-    },
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
         const updateUser = await User.findByIdAndUpdate(
@@ -65,6 +64,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+  },
 };
 
 module.exports = resolvers;
