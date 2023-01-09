@@ -25,6 +25,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// DO I NEED TO PUT <ROUTES> in here??
 function App() {
   return (
     <ApolloProvider client={client}>
