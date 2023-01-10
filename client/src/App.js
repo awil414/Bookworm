@@ -1,31 +1,35 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import SearchBooks from './pages/SearchBooks';
-import SavedBooks from './pages/SavedBooks';
-import Navbar from './components/Navbar';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import SearchBooks from "./pages/SearchBooks";
+import SavedBooks from "./pages/SavedBooks";
+import Navbar from "./components/Navbar";
 
 // Create main GraphQL API endpoint
-const httpLink = createHttpLink ({
-  uri: 'graphql',
+const httpLink = createHttpLink({
+  uri: "graphql",
 });
 
 // Request middleware to attach the JWT token as an 'auth' header
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
-    headers: { ...headers, authorization: token ? `Bearer ${token}` : '' },
+    headers: { ...headers, authorization: token ? `Bearer ${token}` : "" },
   };
 });
 
-// Execute the authLink middleware before making request to GraphQL 
+// Execute the authLink middleware before making request to GraphQL
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
-// DO I NEED TO PUT <ROUTES> in here??
 function App() {
   return (
     <ApolloProvider client={client}>
