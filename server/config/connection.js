@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/bookworm', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/cluster-bookworm', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
